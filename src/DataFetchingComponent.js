@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import logo from './logo.png';
+import videoFile from './SummerizersVideo.mp4'
 
 const DataFetchingComponent = () => {
     const [data, setData] = useState('');
@@ -7,9 +8,10 @@ const DataFetchingComponent = () => {
 
     const fetchTranscript = async () => {
         try {
-            const response = await fetch('your-api-endpoint');
+            const response = await fetch('http://localhost:8080/speechtotext');
             const jsonData = await response.json();
-            setData(jsonData);
+            const transcript = JSON.stringify(jsonData)
+            setData(transcript);
         } catch (error) {
             console.log('Error:', error);
         }
@@ -17,9 +19,10 @@ const DataFetchingComponent = () => {
 
     const fetchSummary = async () => {
         try {
-            const response = await fetch('another-api-endpoint');
+            const response = await fetch('http://localhost:8080/texttosummary');
             const jsonData = await response.json();
-            setData(jsonData);
+            const summary = JSON.stringify(jsonData)
+            setData(summary);
         } catch (error) {
             console.log('Error:', error);
         }
@@ -27,9 +30,10 @@ const DataFetchingComponent = () => {
 
     const saveToMSD = async () => {
         try {
-            const response = await fetch('your-api-endpoint');
-            const jsonData = await response.json();
-            setData(jsonData);
+            //const response = await fetch('your-api-endpoint');
+            //const jsonData = await response.json();
+            const mock = "Success!"
+            setData(mock);
         } catch (error) {
             console.log('Error:', error);
         }
@@ -131,7 +135,7 @@ const DataFetchingComponent = () => {
             <div style={bannerStyle}></div>
             <div style={contentContainerStyle}>
                 <div style={videoContainerStyle}>
-                    <video src="path-to-video.mp4" style={videoStyle} controls />
+                    <video src={videoFile} style={videoStyle} controls />
                     <div style={firstButtonContainerStyle}>
                         <button onClick={fetchTranscript} style={buttonStyle}>
                             Transcribe
