@@ -8,9 +8,106 @@ const DataFetchingComponent = () => {
 
     const fetchTranscript = async () => {
         try {
-            const response = await fetch('http://localhost:8080/speechtotext');
-            const jsonData = await response.json();
-            const transcript = JSON.stringify(jsonData)
+            //const response = await fetch('http://localhost:8080/speechtotext');
+            //const jsonData = await response.json();
+            //const transcript = JSON.stringify(jsonData, null, 2)
+            const mockTranscript = [{
+                "text": "Good afternoon, Thanks for calling ABN AMRO Customer Care. You are speaking to Steven. How can I help you?",
+                "id": "1",
+                "role": "Agent",
+                "participantId": "Steven"
+            },
+            {
+                "text": "Hi, Good afternoon. My name is Anja. I am calling because I think I have lost my debit card.",
+                "id": "2",
+                "role": "Customer",
+                "participantId": "Anja"
+            },
+            {
+                "text": "Ohh, that's unfortunate to hear. Have you already blocked the card in your app?",
+                "id": "3",
+                "role": "Agent",
+                "participantId": "Steven"
+            },
+            {
+                "text": "I haven't.",
+                "id": "4",
+                "role": "Customer",
+                "participantId": "Anja"
+            },
+            {
+                "text": "Hey do you use the mobile banking app?",
+                "id": "5",
+                "role": "Agent",
+                "participantId": "Steven"
+            },
+            {
+                "text": "Yes I use it if you can help me where I can find that.",
+                "id": "6",
+                "role": "Customer",
+                "participantId": "Anja"
+            },
+            {
+                "text": "I will. If you can put me on speaker and get to the app then I'll explain to you how to do this.",
+                "id": "7",
+                "role": "Agent",
+                "participantId": "Steven"
+            },
+            {
+                "text": "Great, thank you.",
+                "id": "8",
+                "role": "Customer",
+                "participantId": "Anja"
+            },
+            {
+                "text": "So if you go to the app, at the bottom of the screen there's a self-service button.",
+                "id": "9",
+                "role": "Agent",
+                "participantId": "Steven"
+            },
+            {
+                "text": "Yes.",
+                "id": "10",
+                "role": "Customer",
+                "participantId": "Anja"
+            },
+            {
+                "text": "In the self-service menu you can select Debit cards.The screen will show you the debit cards that you own. You can select the debit card that is lost and click the block button.After blocking, it will ask you if you will also want to replace the debit card. You can select yes, check the address and replace the card right there.",
+                "id": "11",
+                "role": "Agent",
+                "participantId": "Steven"
+            },
+            {
+                "text": "Oh, That's great. Is that all?",
+                "id": "12",
+                "role": "Customer",
+                "participantId": "Anja"
+            },
+            {
+                "text": "That would be all, unless you have any further questions for me.",
+                "id": "13",
+                "role": "Agent",
+                "participantId": "Steven"
+            },
+            {
+                "text": " No, This was exactly what I was looking for. Thank you so much. ",
+                "id": "14",
+                "role": "Customer",
+                "participantId": "Anja"
+            },
+            {
+                "text": "All right. In that case, have a very nice day.",
+                "id": "15",
+                "role": "Agent",
+                "participantId": "Steven"
+            },
+            {
+                "text": " Thank you, Steven. Bye, bye. All right. Bye.",
+                "id": "16",
+                "role": "Customer",
+                "participantId": "Anja"
+            }]
+            const transcript = JSON.stringify(mockTranscript, null, 2)
             setData(transcript);
         } catch (error) {
             console.log('Error:', error);
@@ -19,9 +116,18 @@ const DataFetchingComponent = () => {
 
     const fetchSummary = async () => {
         try {
-            const response = await fetch('http://localhost:8080/texttosummary');
-            const jsonData = await response.json();
-            const summary = JSON.stringify(jsonData)
+            //const response = await fetch('http://localhost:8080/texttosummary');
+            //const jsonData = await response.json();
+            //const summary = JSON.stringify(jsonData, null, 2)
+            const mockSummary = {
+                "issue": "The customer lost their debit card and needed assistance in blocking it in the mobile banking app.",
+                "narrative": "Anja called ABN AMRO Customer Care to ask how to block a lost debit card in the mobile banking app. Steven explained how to do this and Anja thanked him for his help.",
+                "chapterTitle": "Blocking Credit and debit Cards",
+                "resolution": "The agent instructed the customer to block the lost card in the mobile banking app through the self-service menu and then replace it."
+              }
+            const mockSummaryString = JSON.stringify(mockSummary, null, 2)
+            const summary = mockSummaryString.replace(/,/g, ',\n');
+            
             setData(summary);
         } catch (error) {
             console.log('Error:', error);
@@ -32,7 +138,7 @@ const DataFetchingComponent = () => {
         try {
             //const response = await fetch('your-api-endpoint');
             //const jsonData = await response.json();
-            const mock = "Success!"
+            const mock = "Successfully saved to MSD!"
             setData(mock);
         } catch (error) {
             console.log('Error:', error);
@@ -108,6 +214,7 @@ const DataFetchingComponent = () => {
         fontSize: '16px',
         border: '1px solid #ccc',
         borderRadius: '4px',
+        whiteSpace: 'pre-wrap',
     };
 
     const buttonStyle = {
@@ -118,6 +225,7 @@ const DataFetchingComponent = () => {
         border: 'none',
         cursor: 'pointer',
         marginLeft: '30px',
+        marginTop: '10px',
         width: '170px'
     };
 
